@@ -1,0 +1,7 @@
+---
+- name: 'Converge'
+  hosts: 'all'
+  tasks:
+    - name: 'Include hstr'
+      ansible.builtin.include_role:
+        name: '0x4d4c.hstr'

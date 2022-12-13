@@ -1,0 +1,15 @@
+---
+- name: 'Verify'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+  - name: 'Ensure hstr is installed'
+    ansible.builtin.package:
+      name: 'hstr'
+      state: 'present'
+    check_mode: true
+    register: pkg_status
+
+  - name: 'Assert that hstr is installed'
+    ansible.builtin.assert:
+      that: not pkg_status.changed

@@ -1,0 +1,32 @@
+---
+dependency:
+  name: 'galaxy'
+driver:
+  name: 'docker'
+platforms:
+  # Debian
+  - name: 'Debian-11'
+    image: 'geerlingguy/docker-debian11-ansible'
+  - name: 'Debian-10'
+    image: 'geerlingguy/docker-debian10-ansible'
+  # Fedora
+  - name: 'Fedora-37'
+    image: 'geerlingguy/docker-fedora37-ansible'
+  - name: 'Fedora-36'
+    image: 'geerlingguy/docker-fedora36-ansible'
+  - name: 'Fedora-35'
+    image: 'geerlingguy/docker-fedora35-ansible'
+  # Ubuntu
+  - name: 'Ubuntu-22.04'
+    image: 'geerlingguy/docker-ubuntu2204-ansible'
+  - name: 'Ubuntu-20.04'
+    image: 'geerlingguy/docker-ubuntu2004-ansible'
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+provisioner:
+  name: 'ansible'
+verifier:
+  name: 'ansible'

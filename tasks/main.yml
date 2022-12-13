@@ -1,0 +1,39 @@
+---
+
+- name: 'Ensure dependencies for ppa are installed'
+  when: (ansible_distribution == 'Ubuntu' and ansible_distribution_major_version | int <= 20) or
+        (ansible_distribution == 'Debian' and ansible_distribution_major_version | int <= 10)
+  block:
+    - name: 'Ensure gnupg2 is installed'
+      ansible.builtin.package:
+        name: 'gnupg2'
+        state: 'present'
+
+    - name: 'Add hstr Debian repository'
+      when: ansible_distribution == 'Debian'
+      block:
+        - name: 'Add repository key'
+          ansible.builtin.get_url:
+            url: 'https://www.mindforger.com/gpgpubkey.txt'
+            dest: '/etc/apt/trusted.gpg.d/hstr.asc'
+            mode: '0644'
+
+        - name: 'Add apt repository'
+          ansible.builtin.apt_repository:
+            repo: 'deb https://www.mindforger.com/debian stretch main'
+            state: 'present'
+            update_cache: true
+
+    - name: 'Add ultradvorka ppa'
+      ansible.builtin.apt_repository:
+        repo: 'ppa:ultradvorka/ppa'
+        state: 'present'
+        update_cache: true
+      when: ansible_distribution == 'Ubuntu'
+
+
+- name: 'Install hstr'
+  ansible.builtin.package:
+    name: 'hstr'
+    state: 'present'
+  become: true

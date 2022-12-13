@@ -1,0 +1,25 @@
+galaxy_info:
+  role_name: 'hstr'
+  author: '0x4d4c'
+  description: 'Install the hstr shell history suggest box'
+  license: 'BSD-3-Clause'
+  min_ansible_version: '2.1'
+
+  platforms:
+  - name: 'Debian'
+    versions:
+      - 'bullseye'
+      - 'buster'
+  - name: 'Fedora'
+    versions:
+      - '37'
+      - '36'
+      - '35'
+  - name: 'Ubuntu'
+    versions:
+      - 'jammy'
+      - 'focal'
+
+  galaxy_tags: []
+
+dependencies: []
