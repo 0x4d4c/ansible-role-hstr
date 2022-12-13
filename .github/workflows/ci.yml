@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: '9 22 * * 2'
 
+defaults:
+  run:
+    working-directory: '0x4d4c.hstr'
+
 jobs:
   molecule:
     runs-on: 'ubuntu-latest'
