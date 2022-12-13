@@ -3,7 +3,8 @@ name: 'Molecule Test'
 
 on:
   push:
-    - 'main'
+    branches:
+      - 'main'
   pull_request:
   schedule:
     - cron: '9 22 * * 2'
